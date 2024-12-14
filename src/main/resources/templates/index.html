@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Đỉnh đồng</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/static/Bootraps/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/styles.css}">
+    <script th:src="@{/static/js/jquery-3.7.1.min.js}" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</head>
+<body style="position: relative">
+<header class="row m-0 d-flex align-items-center" style="background: #007aba">
+    <div class="col-3 p-0">
+        <div th:replace="~{header_acc.html :: header_account}"></div>
+    </div>
+    <div class="col-5">
+        <div class="d-flex justify-content-center">
+            <div class="item d-flex justify-content-center flex-nowrap">
+                <div id="one" class="item-0 item-active item-0---border-right">Sao kê QR âm thanh</div>
+                    <div id="tow" class="item-0 item-0---border-right" >Sao kê cửa hàng</div>
+                    <div id="three" class="item-0 item-0---border-right">Sao kê ví</div>
+                    <div id="four" class="item-0">Sao kê thẻ</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 justify-content-end align-items-center">
+        <div th:replace="~{header_lang.html :: header_lang}"></div>
+    </div>
+
+</header>
+
+<div th:replace="~{user/saokeQR.html :: saokeQR}"></div>
+
+
+<script th:src="@{/static/js/lookup/transaction-1.js}" type="text/javascript"></script>
+<script th:src="@{/static/js/date-picker.js}" type="text/javascript"></script>
+</body>
+</html>
+

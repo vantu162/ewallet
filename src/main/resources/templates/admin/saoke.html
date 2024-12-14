@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <div th:fragment="saoke">
+    <div class="row m-0">
+      <div class="col-12 d-flex align-items-center" style="height: 60px">
+        <div class="d-flex justify-content-center align-items-center">
+          <select id="typeE" class="rounded-1 style--select-1 ms-1">
+            <option value="1">Hệ thống ví</option>
+            <option value="2">Hệ thống thẻ</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <select id="typeTrans" class="rounded-1 style--select-1 ms-1">
+            <option value="1">Tất cả </option>
+            <option value="2">Giao dịch chi</option>
+            <option value="3">Giao dịch thu</option>
+            <option value="6">Thu qua VPB</option>
+            <option value="7">Thu qua BIDV</option>
+            <option value="12">Thu qua NAB</option>
+            <option value="9">Thu khác</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <span class="me-1 ms-4 fw-bold">Giá trị từ</span>
+          <select id="amountFrom" class="rounded-1 style--select-1">
+            <option value="0">Tất cả</option>
+            <option value="100000">100.000</option>
+            <option value="500000">500.000</option>
+            <option value="1000000">1.000.000</option>
+            <option value="3000000">3.000.000</option>
+            <option value="5000000">5.000.000</option>
+            <option value="10000000">10.000.000</option>
+            <option value="300000000">300.000.000</option>
+            <option value="500000000">500.000.000</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <span class="me-1 ms-1 fw-bold">Đến</span>
+          <select id="amountTo" class="rounded-1 style--select-1">
+            <option value="100000">100.000</option>
+            <option value="500000">500.000</option>
+            <option value="1000000">1.000.000</option>
+            <option value="3000000">3.000.000</option>
+            <option value="5000000">5.000.000</option>
+            <option value="10000000">10.000.000</option>
+            <option value="300000000">300.000.000</option>
+            <option selected value="500000000">500.000.000</option>
+          </select>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <span class="me-1 ms-4 fw-bold">Từ ngày</span>
+          <input type="text" id="datepickerFrom" class="rounded-1 style--input-1">
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <span class="me-1 ms-1 fw-bold">Đến</span>
+          <input type="text" id="datepickerTo" class="rounded-1 style--input-1">
+        </div>
+        <button id="btnTransaction" class="rounded-1 style--button-0 ms-3 fw-bold"> Tra cứu</button>
+      </div>
+
+    </div>
+    <div class="row m-0">
+      <div class="col-12 col-md-6 d-flex align-items-center justify-content-start">
+
+        <div class="d-flex flex-row me-5">
+          <span th:text="#{textTongGD}"></span>
+          <span th:text ="${tatolGD}"></span>
+          <span th:text="#{textGD}" class="ms-1"></span>
+        </div>
+
+        <div class="d-flex flex-row me-5">
+          <span th:text="#{textTongSo}"></span>
+          <span th:text ="${tatolTien}" class="ms-1 color-01"></span>
+        </div>
+        <div class="d-flex flex-row me-5">
+          <span th:text="#{textTongPhi}"></span>
+          <span th:text ="${tatolPhi}" class="ms-1 color-01"></span>
+        </div>
+
+      </div>
+      <div class="col-12 col-md-6 d-flex align-items-center justify-content-end">
+        <div class="d-flex flex-row">
+          <div id="prePaging">
+            <div class="d-flex justify-content-center align-items-center btn-trans active-trans--border-left">
+              <img th:src="@{/static/images/angle-left.png}" style="width: 25px; height: 25px;">
+            </div>
+
+          </div>
+          <div id="paging" class="d-flex align-items-center">
+
+          </div>
+          <div id="nextPaging">
+            <div class="d-flex justify-content-center align-items-center btn-trans active-trans--border-right">
+              <img th:src="@{/static/images/angle-right.png}" style="width: 35px; height: 35px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100">
+      <table border="1" class="w-100">
+        <thead>
+        <tr class="w-100">
+          <th>STT</th>
+          <th>Số tiển</th>
+          <th>phí</th>
+          <th>tu</th>
+          <th>den</th>
+          <th>noi dung</th>
+          <th>thoi gian</th>
+        </tr>
+        </thead>
+        <tbody id="listTrans" th:data-info ="${tatolItem}" >
+        <tr th:utext="${htmlTrans}"></tr>
+        </tbody>
+      </table>
+    </div>
+    <script th:src="@{/static/js/lookup/transaction-0.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/date-picker.js}" type="text/javascript"></script>
+  </div>
+</html>

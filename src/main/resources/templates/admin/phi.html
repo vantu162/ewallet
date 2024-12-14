@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:fragment="phi">
+
+        <div class="col-12 col-md-8 d-flex align-items-center" style="height: 60px">
+
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="ms-1 me-1 fw-bold">Từ</span>
+                <input type="text" id="datepickerFrom_phi" class="rounded-1 style--input-1">
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="ms-1 me-1 fw-bold">Đến</span>
+                <input type="text" id="datepickerTo_phi" class="rounded-1 style--input-1">
+            </div>
+            <button id="btn_0" class="rounded-1 style--button-0 fw-bold ms-3"> Tra cứu </button>
+            <div id="time" class="d-flex ms-3 align-items-center">
+                <span class="me-1">Thời gian tra cứu:</span>
+                <span id="timeCurrent" >31/10/2024 11:43:10</span>
+            </div>
+        </div>
+        <div class="row ms-2 me-2">
+            <div class="col-12 col-md-6">
+                <table border="1" class="w-100 mt-3">
+                    <tbody>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Thu hộ</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_t"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_money_t"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Thu hộ</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_c"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_money_c"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50 ps-1" colspan="2">Tổng doanh thu</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_dt"></span><span class="ms-1">đ</span>
+                        </td>
+
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50 ps-1" colspan="2">Chi ngân hàng</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_FeeBank"></span><span class="ms-1">đ</span>
+                        </td>
+
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50 ps-1" colspan="2">Thu net</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_thuNet"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <table border="1" class="w-100 mt-3">
+                    <tbody>
+                        <tr class="w-100">
+                            <td class="w-20 ps-1">TPBank 1</td>
+                            <td class="w-50 ps-1">
+                                <span id="tatol_gd_tpb1"></span><span class="ms-1">gd</span>
+                            </td>
+                            <td class="w-30 ps-1">
+                                <span id="tatol_phi_tpb1"></span><span class="ms-1">đ</span>
+                            </td>
+                        </tr>
+                        <tr class="w-100">
+                            <td class="w-20 ps-1">LNH 150 đ/gd</td>
+                            <td class="w-50 ps-1">
+                                <span id="tatol_gd_lnh_tpb1"></span><span class="ms-1">gd</span>
+                            </td>
+                            <td class="w-30 ps-1">
+                                <span id="tatol_phi_lnh_tpb1"></span><span class="ms-1">đ</span>
+                            </td>
+                        </tr>
+                        <tr class="w-100">
+                            <td class="w-20 ps-1">Nội bộ 50 đ/gd</td>
+                            <td class="w-50 ps-1">
+                                <span id="tatol_gd_nb_tpb1"></span><span class="ms-1">gd</span>
+                            </td>
+                            <td class="w-30 ps-1">
+                                <span id="tatol_phi_nb_tpb1"></span><span class="ms-1">đ</span>
+                            </td>
+                        </tr>
+                        <tr class="w-100">
+                            <td class="w-20 ps-1">GD hoàn</td>
+                            <td class="w-50 ps-1">
+                                <span id="tatol_gd_hoan_tpb1"></span><span class="ms-1">gd</span>
+                            </td>
+                            <td class="w-30 ps-1"></td>
+                        </tr>
+                        <tr class="w-100">
+                            <td class="w-20 ps-1">Số lần chạy</td>
+                            <td class="w-50 ps-1">
+                                <span id="tatol_gd_slc_tpb1"></span><span class="ms-1">gd</span>
+                            </td>
+                            <td class="w-30 ps-1">
+                                <span id="tyLeTPB_1"></span><span class="ms-1">%</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <table border="1" class="w-100 mt-3">
+                    <tbody>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">TPBank 2</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_tpb2"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_tpb2"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">LNH 150 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_lnh_tpb2"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_lnh_tpb2"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Nội bộ 50 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_nb_tpb2"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_nb_tpb2"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">GD hoàn</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_hoan_tpb2"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1"></td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Số lần chạy</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_slc_tpb2"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tyLeTPB_2"></span><span class="ms-1">%</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <table border="1" class="w-100 mt-3">
+                    <tbody>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">PVcomBank</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_pvcb"></span><span class="ms-1">đ</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_pvcb"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">LNH 1000 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_lnh_pvcb"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_lnh_pvcb"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Nội bộ 50 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_nb_pvcb"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_nb_pvcb"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">GD hoàn</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_hoan_pvcb"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1"></td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Số lần chạy</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_slc_pvcb"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tyLePVCB"></span><span class="ms-1">%</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <table border="1" class="w-100 mt-3">
+                    <tbody>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">BIDV</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_bidv"></span><span class="ms-1">đ</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_bidv"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">LNH 1800 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_lnh_bidv"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_lnh_bidv"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Nội bộ 1000 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_nb_bidv"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_nb_bidv"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">GD hoàn</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_hoan_bidv"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1"></td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Số lần chạy</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_slc_bidv"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tyLeBIDV"></span><span class="ms-1">%</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <table border="1" class="w-100 mt-3">
+                    <tbody>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">VPBank</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_vbp"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_vbp"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">LNH 2000 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_lnh_vbp"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_lnh_vbp"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Nội bộ 0 đ/gd</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_nb_vbp"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tatol_phi_nb_vbp"></span><span class="ms-1">đ</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">GD hoàn</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_hoan_vbp"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1"></td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-20 ps-1">Số lần chạy</td>
+                        <td class="w-50 ps-1">
+                            <span id="tatol_gd_slc_vbp"></span><span class="ms-1">gd</span>
+                        </td>
+                        <td class="w-30 ps-1">
+                            <span id="tyLeVPB"></span><span class="ms-1">%</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row me-2 ms-2">
+            <div class="col-12 col-md-2">
+                <div class="d-flex flex-row border-buttom">
+                    <span class="flex-shrink-0">Hoàn trả phí:</span>
+                    <div class="d-flex flex-row ms-1">
+                        <span id="phiHoanTra"></span>
+                        <span class="ms-1">đ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="d-flex flex-row border-buttom">
+                    <span class="flex-shrink-0">Phí thu hộ qua BIDV:</span>
+                    <div class="d-flex flex-row ms-1">
+                        <span id="gdThuHoQuaBIDV"></span>
+                        <span class="ms-1">gd</span>
+                    </div>
+                    <div class="d-flex flex-row ms-4">
+                        <span id="phiThuHoQuaBIDV"></span>
+                        <span class="ms-1">đ</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="d-flex flex-row border-buttom">
+                    <span class="flex-shrink-0">Phí thu hộ qua VPB:</span>
+                    <div class="d-flex flex-row ms-1">
+                        <span id="gdThuHoQuaVPB"></span>
+                        <span class="ms-1">gd</span>
+                    </div>
+                    <div class="d-flex flex-row ms-4">
+                        <span id="phiThuHoQuaVPB"></span>
+                        <span class="ms-1">đ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="d-flex flex-row border-buttom">
+                    <span class="flex-shrink-0">Thu qua QR:</span>
+                    <div class="d-flex flex-row ms-1">
+                        <span id="gdThuQuaQR"></span>
+                        <span class="ms-1">gd</span>
+                    </div>
+                    <div class="d-flex flex-row ms-4">
+                        <span id="phiThuQuaQR"></span>
+                        <span class="ms-1">đ</span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="d-flex flex-row border-buttom">
+                    <span class="flex-shrink-0">Phí qua thẻ Vimass:</span>
+                    <div class="d-flex flex-row ms-1">
+                        <span id="phiThuQuaThe"></span>
+                        <span class="ms-1">gd</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-8 d-flex align-items-center">
+            <div class="d-flex justify-content-center align-items-center">
+                <input type="text" id="datepicker" class="rounded-1 style--input-0">
+            </div>
+            <button id="btn_1" class="rounded-1 style--button-0 fw-bold ms-3"> Tra cứu</button>
+            </div>
+        <div class="row me-2 ms-2">
+            <table border="1" class="w-100">
+                <tbody id="htmlList" >
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            $(document).ready(function() {;
+                $("#btn_0").on('click',function() {
+                    // alert("click!");
+
+                    // runSequentially();
+                    var timeFrom = $('#datepickerFrom_phi').val();
+                    var timeTo = $('#datepickerTo_phi').val();
+
+                    var time =  getTimeMiliSecons(timeFrom);
+                    var time1 =  getTimeMiliSecons(timeTo);
+                    // console.log("t: " + time +"___t1: " + time1)
+
+                    if(time1 > time){
+                        runSequentially();
+                    }else{
+                        alert("Ngày bắt đầu phải nhỏ hơn ngày kết thúc!");
+                    }
+                });
+
+                $("#btn_1").on('click',function() {
+
+                    getDataThongKeGD();
+                });
+            });
+
+            function getTimeMiliSecons(input){// Parse it to a Date object
+                const [day, month, year, hour, minute, second] = input.match(/\d+/g);
+
+                // Convert to Date object (month is 0-based, so subtract 1)
+                const date = new Date(year, month - 1, day, hour, minute, second);
+
+                // Get milliseconds
+                const milliseconds = date.getTime();
+
+                console.log(`Milliseconds: ${milliseconds}`);
+                return milliseconds;
+            }
+
+            async function runSequentially() {
+                $("#loader").show();
+                try {
+                    await getDataTPB();
+                    await getDataTPB_1();
+                    await getDataPVCB();
+                    await getDataBIDV();
+                    await getDataVPB();
+                    await getDataThuQuaQR();
+                    await getDataThuQuaThe();
+                    await getDataPhiHoanTra();
+                    await getDataThuQuaBIDV();
+                    await getDataThuQuaVBP();
+                    await getDataDoanhthu();
+                    await getTimeCurrent();
+                } catch (error) {
+                    console.error("Error occurred:", error);
+                }finally {
+
+                    setTimeout(function() {
+                        $("#loader").hide();
+                    }, 500);
+                }
+
+            }
+
+
+            function getDataDoanhthu(){
+
+                $.ajax({
+                    url: '/bank/doanhthu',
+                    type: 'GET',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        var json = JSON.parse(response);
+                        console.log("response getDataDoanhthu ======> T:" +json.tongThu +"_C:"+ json.tongChi);
+
+                        $("#tatol_t").empty().append(json.tongThu);
+                        $("#tatol_money_t").empty().append(json.tongTienThu);
+                        $("#tatol_c").empty().append(json.tongChi);
+                        $("#tatol_money_c").empty().append(json.tongTienChi);
+                        $("#tatol_dt").empty().append(json.tongDoanhThu);
+                        $("#tatol_FeeBank").empty().append(json.chiNganHang);
+                        $("#tatol_thuNet").empty().append(json.thuNet);
+
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataTPB(){
+                console.log("getDataTPB" + $('#datepickerFrom_phi').val() +"/ " +$('#datepickerTo_phi').val() );
+                $.ajax({
+                    url: '/bank/tbp',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataTPB ======> " +response);
+                        var json = JSON.parse(response);
+
+                        $("#tatol_gd_tpb1").empty().append(json.soGD);
+                        $("#tatol_phi_tpb1").empty().append(json.phiGD);
+                        $("#tatol_gd_lnh_tpb1").empty().append(json.soGDLNH);
+                        $("#tatol_phi_lnh_tpb1").empty().append(json.phiGDLNH);
+                        $("#tatol_gd_nb_tpb1").empty().append(json.gdNoiBo);
+                        $("#tatol_phi_nb_tpb1").empty().append(json.phiNoiBo);
+                        $("#tatol_gd_hoan_tpb1").empty().empty().append(json.soGDHoan);
+                        $("#tatol_gd_slc_tpb1").empty().append(json.soLanChayThucTe);
+
+                        var tyle =getTyle(json);
+                        $("#tyLeTPB_1").empty().append(tyle.toFixed(3));
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataTPB_1(){
+                console.log("getDataTPB_1");
+                $.ajax({
+                    url: '/bank/tbp1',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataTPB_1 ======> " +response);
+                        var json = JSON.parse(response);
+
+                        $("#tatol_gd_tpb2").empty().append(json.soGD);
+                        $("#tatol_phi_tpb2").empty().append(json.phiGD);
+                        $("#tatol_gd_lnh_tpb2").empty().append(json.soGDLNH);
+                        $("#tatol_phi_lnh_tpb2").empty().append(json.phiGDLNH);
+                        $("#tatol_gd_nb_tpb2").empty().append(json.gdNoiBo);
+                        $("#tatol_phi_nb_tpb2").empty().append(json.phiNoiBo);
+                        $("#tatol_gd_hoan_tpb2").empty().append(json.soGDHoan);
+                        $("#tatol_gd_slc_tpb2").empty().append(json.soLanChayThucTe);
+
+                        var tyle =getTyle(json);
+                        $("#tyLeTPB_2").empty().append(tyle.toFixed(3));
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataPVCB(){
+                console.log("getDataPVCB");
+                $.ajax({
+                    url: '/bank/pvcb',
+                    type: 'GET',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataPVCB ======> " +response);
+                        var json = JSON.parse(response);
+
+                        $("#tatol_gd_pvcb").empty().append(json.soGD);
+                        $("#tatol_phi_pvcb").empty().append(json.phiGD);
+                        $("#tatol_gd_lnh_pvcb").empty().append(json.soGDLNH);
+                        $("#tatol_phi_lnh_pvcb").empty().append(json.phiGDLNH);
+                        $("#tatol_gd_nb_pvcb").empty().append(json.gdNoiBo);
+                        $("#tatol_phi_nb_pvcb").empty().append(json.phiNoiBo);
+                        $("#tatol_gd_hoan_pvcb").empty().append(json.soGDHoan);
+                        $("#tatol_gd_slc_pvcb").empty().append(json.soLanChayThucTe);
+
+                        var tyle =getTyle(json);
+                        $("#tyLePVCB").empty().append(tyle.toFixed(3));
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataBIDV(){
+                console.log("getDataBIDV");
+                $.ajax({
+                    url: '/bank/bidv',
+                    type: 'GET',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataBIDV ======> " +response);
+
+                        var json = JSON.parse(response);
+
+                        $("#tatol_gd_bidv").empty().append(json.soGD);
+                        $("#tatol_phi_bidv").empty().append(json.phiGD);
+                        $("#tatol_gd_lnh_bidv").empty().append(json.soGDLNH);
+                        $("#tatol_phi_lnh_bidv").empty().append(json.phiGDLNH);
+                        $("#tatol_gd_nb_bidv").empty().append(json.gdNoiBo);
+                        $("#tatol_phi_nb_bidv").empty().append(json.phiNoiBo);
+                        $("#tatol_gd_hoan_bidv").empty().append(json.soGDHoan);
+                        $("#tatol_gd_slc_bidv").empty().append(json.soLanChayThucTe);
+
+                        var tyle =getTyle(json);
+                        $("#tyLeBIDV").empty().append(tyle.toFixed(3));
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataVPB(){
+                console.log("getDataVPB");
+                $.ajax({
+                    url: '/bank/vpb',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataVPB ======> " +response);
+                        var json = JSON.parse(response);
+
+                        $("#tatol_gd_vbp").empty().append(json.soGD);
+                        $("#tatol_phi_vbp").empty().append(json.phiGD);
+                        $("#tatol_gd_lnh_vbp").empty().append(json.soGDLNH);
+                        $("#tatol_phi_lnh_vbp").empty().append(json.phiGDLNH);
+                        $("#tatol_gd_nb_vbp").empty().append(json.gdNoiBo);
+                        $("#tatol_phi_nb_vbp").empty().append(json.phiNoiBo);
+                        $("#tatol_gd_hoan_vbp").empty().append(json.soGDHoan);
+                        $("#tatol_gd_slc_vbp").empty().append(json.soLanChayThucTe);
+
+                        var tyle =getTyle(json);
+                        $("#tyLeVPB").empty().append(tyle.toFixed(3));
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getTyle(json){
+                console.log("slc:" +json.soLanChayThucTe);
+
+                var slc = json.soLanChayThucTe.replaceAll('/\\./g','');
+
+                var tyle = 0;
+
+                if(slc > 0){
+                    var soGD = json.soGD.replaceAll('/\\./g','');
+                    tyle = parseFloat((slc - soGD )/soGD);
+                }
+                return tyle;
+            }
+
+            function getDataThuQuaQR(){
+
+                $.ajax({
+                    url: '/bank/thuquaqr',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataThuQuaQR ======> " +response);
+                        var json = JSON.parse(response);
+                        $("#gdThuQuaQR").empty().append(json.total)
+                        $("#phiThuQuaQR").empty().append(json.totalFee)
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataThuQuaThe(){
+
+                $.ajax({
+                    url: '/bank/thuquathe',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        console.log("response getDataThuQuaThe ======> " +response);
+                        $("#phiThuQuaThe").empty().append(response)
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataPhiHoanTra(){
+                $.ajax({
+                    url: '/bank/phihoantra',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val()
+                    },
+                    success: function(response) {
+                        $("#phiHoanTra").empty().append(response)
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataThuQuaBIDV(){
+                $.ajax({
+                    url: '/bank/thuquabank',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val(),
+                        type: 7
+                    },
+                    success: function(response) {
+                        var arr = response.split("___");
+                        $("#gdThuHoQuaBIDV").empty().append(arr[0]);
+                        $("#phiThuHoQuaBIDV").empty().append(arr[1]);
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataThuQuaVBP(){
+                $.ajax({
+                    url: '/bank/thuquabank',
+                    type: 'POST',
+                    data: {
+                        timeFrom: $('#datepickerFrom_phi').val(),
+                        timeTo: $('#datepickerTo_phi').val(),
+                        type: 6
+                    },
+                    success: function(response) {
+                        var arr = response.split("___");
+                        $("#gdThuHoQuaVPB").empty().append(arr[0]);
+                        $("#phiThuHoQuaVPB").empty().append(arr[1]);
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getDataThongKeGD(){
+                $("#loader").show();
+                $.ajax({
+                    url: '/bank/thongkeotheogiotrongngay',
+                    type: 'GET',
+                    data: {
+                        date: $('#datepicker').val(),
+                    },
+                    success: function(response) {
+                        if(response != ""){
+                            $("#htmlList").empty().append(response);
+                        }
+                        $("#loader").hide();
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+            function getTimeCurrent(){
+                $.ajax({
+                    url: '/bank/timecurrent',
+                    type: 'GET',
+
+                    success: function(response) {
+                        if(response != ""){
+                            $("#time").show();
+                            $("#timeCurrent").empty().append(response);
+                        }
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+
+
+
+        </script>
+
+        <script th:src="@{/static/js/time-picker.js}" type="text/javascript"></script>
+    </div>
+
+
+</html>

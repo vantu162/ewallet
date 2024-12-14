@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:fragment="login">
+        <form id="ajaxForm"  method="post">
+            <label for="user">Username:</label>
+            <input type="text" id="user" name="user" />
+
+            <label for="pass">Username:</label>
+            <input type="text" id="pass" name="pass" />
+
+            <button id="ajaxFormLogin" type="button">button</button>
+        </form>
+
+        <script>
+            $(document).ready(function() {
+                $("#ajaxFormLogin").on('click',function(){
+                        // alert('Username là: ' +  $('#user').val());
+                        $.ajax({
+                            url: '/login',
+                            type: 'POST',
+                            data: {
+                                username: $('#user').val(),
+                                password: $('#pass').val()
+                            },
+                            success: function(response) {
+                                if (response.msgCode === 1) {
+                                    // Đăng nhập thành công, reload trang
+                                    window.location.reload();
+                                } else {
+                                    // Xử lý lỗi nếu cần
+                                    console.error('Login failed:', response.message);
+                                }
+                            },
+                            error: function(error) {
+                                console.log('Có lỗi xảy ra.');
+                            }
+                        });
+                });
+            });
+        </script>
+    </div>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="header_account">
+  <div class="row m-0">
+    <div class="col-6 col-md-6 p-0 d-flex align-items-center">
+      <div class="d-flex ">
+        <div class="dropdown">
+          <div class="d-flex flex-row">
+            <div class="d-flex align-items-center ms-1">
+              <img th:src="|https://vimass.vn/vmbank/services/media/getImage?id=${accountInfo.avatar}|"
+                   style="width: 50px; height: 50px; border-radius: 25px; padding: 3px;">
+            </div>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+              <span th:text="${accountInfo.nameAlias}" class="flex-shrink-0 acc-text-0"></span>
+<!--              <span th:text="${accountInfo.id}" class="flex-shrink-0 acc-text-0"></span>-->
+            </div>
+          </div>
+
+        <div class="dropdown-content">
+          <div class="d-flex flex-column url">
+            <a href="/quantri" target="_blank" sec:authorize="hasRole('ADMIN')">Nội bộ</a>
+            <a href="/">Sao kê</a>
+            <a href="#">Quản trị TĐN</a>
+            <a href="#">Quản trị thu hộ</a>
+            <a href="#">Quản trị chi hộ</a>
+            <a href="#">Quản trị thu hộ BIDV</a>
+            <a href="#">Quản trị thu hộ VPB</a>
+            <a href="#">Quản trị QR</a>
+            <a href="#">Dịch vụ mở khóa</a>
+            <a href="#" sec:authorize="hasRole('USER')">Báo cáo NHNN</a>
+            <a href="#"id="logout">Đăng xuất</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $("#logout").on('click', function(event) {
+
+          $.ajax({
+            type: 'POST',
+            url: '/logout', // URL logout
+            success: function(response) {
+              // Nếu logout thành công, bạn có thể chuyển hướng đến trang login
+              // alert("logout thanh cong" + response.status);
+              if(response.status == "OK"){
+                window.location.href = "/acc";
+              }
+
+            },
+            error: function(xhr, status, error) {
+              // Xử lý lỗi nếu có
+              console.error("Logout failed: " + error);
+            }
+          });
+        });
+      });
+    </script>
+  </div>
+</div>
+
+</html>
+

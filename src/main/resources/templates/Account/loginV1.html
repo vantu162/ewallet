@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Đỉnh đồng</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{static/Bootraps/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/styles.css}">
+    <script th:src="@{static/js/jquery-3.7.1.min.js}" type="text/javascript"></script>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<!--<form th:action="@{/login}" method="post">-->
+<form  method="post">
+    <div><label> User Name : <input type="text" id="user" name="username"/> </label></div>
+    <div><label> Password: <input type="password" id="pass" name="password"/> </label></div>
+    <div><button id="loginForm" type="button" style="width: 100px; height: 70px" > click </button></div>
+</form>
+<script>
+    $(document).ready(function() {
+        $("#loginForm").on('click',
+            function () {
+                // event.preventDefault(); // Ngăn gửi form trực tiếp
+                alert('Username là: nhay vao day');
+                $.ajax({
+                    url: '/login',
+                    type: 'POST',
+                    data: {
+                        username: $('#user').val(),
+                        password: $('#pass').val()
+                    },
+                    success: function (response) {
+
+                        if (response.indexOf("___") != -1) {
+                            var check = response.split("___")[0];
+                            var url = response.split("___")[1];
+
+                            if (check == "OK") {
+                                window.location.href = url;
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            });
+    });
+</script>
+</body>
+
+</html>

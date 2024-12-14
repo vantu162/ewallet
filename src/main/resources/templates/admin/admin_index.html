@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns="http://www.w3.org/1999/xhtml">-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <title>Ví điện tử - ADMIN</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" media="all" th:href="@{/static/Bootraps/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/styles.css}">
+  <script th:src="@{/static/js/jquery-3.7.1.min.js}" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</head>
+<body style="position: relative">
+<header class="row m-0 d-flex align-items-center" style="background: #007aba">
+  <div class="col-3 p-0">
+    <div th:replace="~{header_acc.html :: header_account}"></div>
+  </div>
+  <div class="col-5">
+    <div class="d-flex justify-content-center">
+      <div class="item d-flex justify-content-center flex-nowrap">
+        <div id="one" class="item-0 item-active item-0---border-right">Giao dịch</div>
+        <div id="tow" class="item-0 item-0---border-right" >Tài khoản</div>
+        <div id="three" class="item-0 item-0---border-right">Đơn vị</div>
+        <div id="four" class="item-0">Phí</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-4 justify-content-end align-items-center">
+    <div th:replace="~{header_lang.html :: header_lang}"></div>
+  </div>
+
+</header>
+  <main>
+      <div class="one">
+        <div th:replace="~{admin/saoke.html :: saoke}"></div>
+      </div>
+
+      <div class="tow" style="display: none">
+            <div th:replace="~{admin/taiKhoan.html :: taiKhoan}"></div>
+      </div>
+
+      <div class="three" style="display: none">
+           <div th:replace="~{admin/donvi.html :: donvi}"></div>
+      </div>
+
+      <div class="four" style="display: none">
+            <div th:replace="~{admin/phi.html :: phi}"></div>
+      </div>
+
+      <div id="loader" style="display: none">
+          <div class="loading">
+              <div class="d-flex justify-content-center align-items-center">
+                  <img th:src="@{/static/images/loading.gif}" class="img-loading">
+              </div>
+          </div>
+      </div>
+      <div id="customAlert" style="display: none; background-color: #f9edbe; color: #856404; padding: 15px; border: 1px solid #ffeeba; position: fixed; top: 20px; right: 20px; z-index: 1000;">
+          <span id="alertMessage"></span>
+      </div>
+      <script>
+          $(document).ready(function() {
+              $("#one").on('click',function() {
+                  $(".item div" ).removeClass("item-active");
+                  $(this).addClass("item-active");
+                  $(".one").show();
+                  $(".tow").hide();
+                  $(".three").hide();
+                  $(".four").hide();
+              });
+
+              $("#tow").on('click',function() {
+                  $(".item div" ).removeClass("item-active");
+                  $(this).addClass("item-active");
+                  $(".one").hide();
+                  $(".tow").show();
+                  $(".three").hide();
+                  $(".four").hide();
+
+                  setTimeout(function() {
+                      $("#reset").click();
+                  }, 100);
+
+              });
+
+              $("#three").on('click',function() {
+                  $(".item div" ).removeClass("item-active");
+                  $(this).addClass("item-active");
+                  $(".one").hide();
+                  $(".tow").hide();
+                  $(".three").show();
+                  $(".four").hide();
+              });
+
+              $("#four").on('click',function() {
+                  $(".item div" ).removeClass("item-active");
+                  $(this).addClass("item-active");
+                  $(".one").hide();
+                  $(".tow").hide();
+                  $(".three").hide();
+                  $(".four").show();
+
+              });
+          });
+      </script>
+  </main>
+
+
+</body>
+</html>
+

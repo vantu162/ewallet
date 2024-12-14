@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Đỉnh đồng</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/Bootraps/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/jquery-3.7.1.min.js}" type="text/javascript"></script>
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center">
+    <form id="ajaxForm"  method="post">
+        <label for="user">Username:</label>
+        <input type="text" id="user" name="user" />
+
+        <label for="pass">Username:</label>
+        <input type="text" id="pass" name="pass" />
+
+        <button id="ajaxFormLogin" type="button">button</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#ajaxFormLogin").on('click',function(){
+              //  alert('Username là: ' +  $('#user').val());
+
+                $.ajax({
+                    url: '/loginv1',
+                    type: 'POST',
+                    data: {
+                        username: $('#user').val(),
+                        password: $('#pass').val()
+                    },
+                    success: function(response) {
+                        // alert(response);
+
+                        if (response == "OK") {
+                            window.location.href = "/";
+                        } else {
+                            // Xử lý lỗi nếu cần
+                            console.error('Login failed:', response.message);
+                        }
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            });
+        });
+    </script>
+</div>
+</body>
+
+</html>

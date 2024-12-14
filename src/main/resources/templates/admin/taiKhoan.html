@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:fragment="taiKhoan">
+    <div class="d-flex justify-content-end align-items-center m-2">
+        <div id="reset" class="btn-r--s1 p-2" >
+            <img th:src="@{/static/images/refresh.png}" style="width: 20px;">
+        </div>
+    </div>
+    <div class="row d-flex flex-row m-2">
+        <div class="col-12 col-md-4 d-flex flex-column">
+            <div class="d-flex flex-column w-100">
+                <div id="htmlTaikhoandambao1_txt">
+                </div>
+                <table border="1" class="w-100">
+                    <thead>
+                    <tr class="w-100">
+                        <th class="th--style-0 w-20 ps-1">NH</th>
+                        <th class="th--style-0 w-50 ps-1">Số TK</th>
+                        <th class="th--style-0 w-30 ps-1">Số dư</th>
+                    </tr>
+                    </thead>
+                    <tbody id="htmlTaikhoandambao1" >
+                    </tbody>
+                </table>
+            </div>
+
+            <table border="1" class="w-100 mt-3 mb-3">
+                <tbody id="htmlVenhSoDu" >
+                </tbody>
+            </table>
+
+            <table border="1" class="w-100 mb-3">
+                <thead>
+                <tbody id="htmlChenhLech" >
+                <!--                <tr th:utext="${htmlTrans}"></tr>-->
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-12 col-md-4 d-flex flex-column">
+
+            <div id="htmlTaikhoancanhan_info_txt">
+            </div>
+            <table border="1" class="w-100">
+                <thead>
+                <tr class="w-100">
+                    <th class="th--style-0 w-20 ps-1">NH</th>
+                    <th class="th--style-0 w-50 ps-1">Số TK</th>
+                    <th class="th--style-0 w-30 ps-1">Số dư</th>
+                </tr>
+                </thead>
+                <tbody id="htmlTaikhoancanhan_info" ></tbody>
+            </table>
+
+            <div id="htmlTaikhoanctt_info_txt" class="mt-2">
+            </div>
+            <table border="1" class="w-100">
+                <thead>
+                <tr class="w-100">
+                    <th class="th--style-0 w-20 ps-1">NH</th>
+                    <th class="th--style-0 w-50 ps-1">Số TK</th>
+                    <th class="th--style-0 w-30 ps-1">Số dư</th>
+                </tr>
+                </thead>
+                <tbody id="htmlTaikhoanctt_info" ></tbody>
+            </table>
+
+            <div class="d-flex justify-content-start align-items-center mb-2">
+                <a class="fw-bold" target="_blank" href ="https://docs.google.com/spreadsheets/d/1VcDQVrQK1fZlkw9xTKq50SYIc9B29n6oWScKetZaFZE/edit?gidzl=ectwSkoCfNUZU_vyxvIaSwX_-tZumFTpjoZvVggJet6oVVfv_iMbSUL_-Yp-awabutZn8JT-sMeyxOAeVm&gid=1087001523#gid=1087001523">Theo dõi CASA</a>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-4 d-flex flex-column">
+            <div id="htmlTaikhoanthuchiho_info_txt">
+            </div>
+
+            <table border="1" class="w-100">
+                <thead>
+                <tr class="w-100">
+                    <th class="th--style-0 w-20 ps-1">NH</th>
+                    <th class="th--style-0 w-50 ps-1">Số TK</th>
+                    <th class="th--style-0 w-30 ps-1">Số dư</th>
+                </tr>
+                </thead>
+                <tbody id="htmlTaikhoanthuchiho_info" >
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-start align-items-center flex-row">
+                <strong class="color-01">Thời gian tra cứu: </strong> <span id="tiemLookup" class="color-01 fw-bold"></span>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            // setTimeout(function() {
+            //     getData();
+            // }, 300);
+
+            $("#reset").on('click',function() {
+                alert("nhay vao muc tai khoan");
+                getData();
+            });
+        });
+        function getData(){
+            $("#loader").show();
+            $.ajax({
+                url: '/a',
+                type: 'GET',
+                success: function(response) {
+                    if(response.indexOf("___")!=-1){
+                        // console.log("response ======> " +response);
+
+                        genHtmlTaikhoandambao1(response.split("___")[0]);
+
+                        $("#htmlVenhSoDu").empty();
+                        $("#htmlVenhSoDu").append(response.split("___")[1]);
+
+                        $("#htmlChenhLech").empty();
+                        $("#htmlChenhLech").append(response.split("___")[2]);
+
+                        genHtmlTaikhoancanhan_info(response.split("___")[3]);
+                        genHtmlTaikhoanctt_info(response.split("___")[4]);
+
+                        genHtmlTaikhoanthuchiho_info(response.split("___")[5]);
+                        var htmlContent_6 = response.split("___")[6];
+                        $("#tiemLookup").empty();
+                        $("#tiemLookup").append(response.split("___")[7]);
+
+                        $("#loader").hide();
+                    }
+                },
+                error: function(error) {
+                    console.log('Có lỗi xảy ra.');
+                }
+            });
+        }
+
+        function genHtmlTaikhoandambao1(data){
+
+            $("#htmlTaikhoandambao1_txt").empty();
+            $("#htmlTaikhoandambao1_txt").append(data.split("_vm_")[0]);
+
+            $("#htmlTaikhoandambao1").empty();
+            $("#htmlTaikhoandambao1").append(data.split("_vm_")[1]);
+        }
+
+        function genHtmlTaikhoancanhan_info(data){
+
+            $("#htmlTaikhoancanhan_info_txt").empty();
+            $("#htmlTaikhoancanhan_info_txt").append(data.split("_vm_")[0]);
+
+            $("#htmlTaikhoancanhan_info").empty();
+            $("#htmlTaikhoancanhan_info").append(data.split("_vm_")[1]);
+        }
+
+        function genHtmlTaikhoanctt_info(data){
+
+            $("#htmlTaikhoanctt_info_txt").empty();
+            $("#htmlTaikhoanctt_info_txt").append(data.split("_vm_")[0]);
+
+            $("#htmlTaikhoanctt_info").empty();
+            $("#htmlTaikhoanctt_info").append(data.split("_vm_")[1]);
+        }
+
+        function genHtmlTaikhoanthuchiho_info(data){
+
+            $("#htmlTaikhoanthuchiho_info_txt").empty();
+            $("#htmlTaikhoanthuchiho_info_txt").append(data.split("_vm_")[0]);
+
+            $("#htmlTaikhoanthuchiho_info").empty();
+            $("#htmlTaikhoanthuchiho_info").append(data.split("_vm_")[1]);
+        }
+    </script>
+</div>
+</html>

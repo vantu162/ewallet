@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<header th:fragment="header">
+    <div class="row">
+        <div class="col-6 col-md-6 p-0 d-flex align-items-center" style="height: 60px; background-color: yellow">
+            <div class="col-3 d-flex flex-column">
+                <span th:text="${accountInfo.id}"></span>
+            </div>
+            <div class="col-9 d-flex justify-content-center align-items-center">
+                <button id="logout" type="button">Logout</button>
+            </div>
+        </div>
+        <div class="col-6 col-md-6 d-flex justify-content-end align-items-center" style="height: 60px; background-color: red">
+            <div>lang</div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#logout").on('click', function(event) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/logout', // URL logout
+                        success: function(response) {
+                            // Nếu logout thành công, bạn có thể chuyển hướng đến trang login
+                            // alert("logout thanh cong" + response.status);
+                            if(response.status == "OK"){
+                                window.location.href = "/acc";
+                            }
+
+                        },
+                        error: function(xhr, status, error) {
+                            // Xử lý lỗi nếu có
+                            console.error("Logout failed: " + error);
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+</header>
+
+</html>
+

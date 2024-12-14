@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:fragment="donvi">
+    <div class="row m-0">
+        <div class="col-12 d-flex align-items-center" style="height: 60px">
+            <div class="d-flex justify-content-center align-items-center">
+                <select id="listViDN" class="rounded-1 style--select-1 ms-1">
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+                <input id="idViDN" value="" type="text" class="rounded-1 style--input-1 ms-1" placeholder="ví doanh nghiệp">
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="me-1 ms-4 fw-bold">Từ ngày</span>
+                <input type="text" id="datepickerFrom_donvi" class="rounded-1 style--input-1">
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="me-1 ms-1 fw-bold">Đến</span>
+                <input type="text" id="datepickerTo_donvi" class="rounded-1 style--input-1">
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+                <select id="type" class="rounded-1 style--select-1 ms-1">
+                    <option value="0">Tất cả giao dịch </option>
+                    <option value="2">Giao dịch chi</option>
+                    <option value="1">Giao dịch thu</option>
+                    <option value="6">Thu qua VPB</option>
+                    <option value="7">Thu qua BIDV</option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+                <input id="content" type="text" class="rounded-1 style--input-1 ms-1" placeholder="Nội dung...">
+            </div>
+
+            <button id="btnTransaction_dn" class="rounded-1 style--button-0 ms-3"> Tra cứu</button>
+        </div>
+
+    </div>
+
+    <div class="row m-0">
+        <div class="w-100">
+            <table border="1" class="w-100">
+                <thead>
+                <tr class="w-100">
+                    <th>STT</th>
+                    <th>Mã gai dịch</th>
+                    <th>Số tiền</th>
+                    <th>noi dung</th>
+                    <th>thoi gian</th>
+                </tr>
+                </thead>
+                <tbody id="htmlList_GD_DN"  >
+<!--                <tr th:utext="${htmlTrans}"></tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            setTimeout(function() {
+                getDsViDn();
+                selectChange();
+            }, 100);
+
+            $("#btnTransaction_dn").on('click',function() {
+
+                var timeFrom = new Date($('#datepickerFrom_donvi').val());
+                var timeTo = new Date($('#datepickerTo_donvi').val());
+                if(timeTo > timeFrom){
+                    getDataDS(0,100);
+                }else{
+                    alert("Ngày bắt đầu phải nhỏ hơn ngày kết thúc!");
+                }
+
+
+            });
+
+        });
+        function selectChange() {
+
+            $('#listViDN').on('change', function() {
+                const selectedValue = $(this).val();
+                $('#idViDN').val(selectedValue);
+            });
+
+        }
+
+           function getDataDS(a, b){
+               $("#loader").show();
+               var path = '/donvi/saoke_v';
+               var vid = $("#listViDN").find('option:selected').text().trim();
+
+               if (vid.startsWith('1')) {
+                   path = '/donvi/saoke_v';
+               } else if (vid.startsWith('2')) {
+                   path = '/donvi/saoke_v1';
+               }
+
+               $.ajax({
+                   url: path,
+                   type: 'POST',
+                   data: {
+                       idVi: $('#idViDN').val(),
+                       timeFrom: $('#datepickerFrom_donvi').val(),
+                       timeTo: $('#datepickerTo_donvi').val(),
+                       offset: a,
+                       limit: b,
+                       type: $("#type option:selected").val(),
+                       content: $("#content").val()
+                   },
+                   success: function(response) {
+                       if(response != ""){
+                           // console.log("response: " +response);
+                           $("#htmlList_GD_DN").empty().append(response);
+                           $("#loader").hide();
+                       }
+                   },
+                   error: function(error) {
+                       console.log('Có lỗi xảy ra.');
+                   }
+               });
+           }
+
+
+            function getDsViDn(){
+                $.ajax({
+                    url: '/donvi/dsvidn',
+                    type: 'GET',
+                    success: function(response) {
+                        if(response != ""){
+                            $("#listViDN").empty().append(response);
+
+                            const selectedValue = $("#listViDN option:selected").val();
+                            $('#idViDN').val(selectedValue);
+                        }
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra.');
+                    }
+                });
+            }
+    </script>
+</div>
+
+</html>
